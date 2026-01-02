@@ -1,10 +1,31 @@
 import numpy as np
 import pandas as pd
+import random
 
 
 """
 This a Decison Tree Classifier which works on the cart algorithm, i.e., Gini Impurity
 """
+
+def train_test_split(df, test_size):
+    # We are first going to check if the input test size is a proportion or is it some kind of real/integer value
+    if isinstance(test_size, float):
+        test_size = test_size * len(df)
+    
+    indices = df.index.tolist() # This gives us a list named indices which consists of all the indexes present in the dataframe. So, for example if we have about 2000 data samples, then we will get 0 to 1999 in the list of indices
+    test_indices = random.sample(indices, k = test_size)
+    
+    df_test = df.loc[test_indices]
+    df_train = df.drop(test_indices)
+
+    return df_train, df_test
+
+
+
+
+
+
+
 
 class DecisionTreeClassifier():
 
